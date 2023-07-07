@@ -20,6 +20,7 @@ namespace ThrustBeacon
         internal readonly ConcurrentDictionary<IMyCubeGrid, GridComp> GridMap = new ConcurrentDictionary<IMyCubeGrid, GridComp>();
         internal readonly List<IMyPlayer> PlayerList = new List<IMyPlayer>();
         internal static List<SignalComp> SignalList = new List<SignalComp>();
+        internal static MyConcurrentList<SignalComp> ReceivedSignalList = new MyConcurrentList<SignalComp>();
         internal readonly List<SignalComp> DrawList = new List<SignalComp>();
 
 
