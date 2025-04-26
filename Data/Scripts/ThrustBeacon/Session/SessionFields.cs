@@ -7,6 +7,7 @@ using Sandbox.ModAPI;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using ThrustBeacon.Data.Scripts.ThrustBeacon.PbApi;
 using VRage;
 using VRage.Game.Components;
 using VRage.Game.ModAPI;
@@ -72,6 +73,9 @@ namespace ThrustBeacon
         internal HashSet<IMyEntity> entityHash = new HashSet<IMyEntity>();
         internal long combineDistSqr;
         internal bool useCombine;
+        internal ApiBackend Api;
+        internal bool PbApiInited;
+        internal bool PbActivate;
 
         private void Clean()
         {
@@ -100,6 +104,11 @@ namespace ThrustBeacon
             [ProtoMember(4)] public ulong SteamID;
             [ProtoMember(5)] public string PluginVersion = "0";
             [ProtoMember(6)] public string NexusVersion;
+        }
+
+        public Session()
+        {
+            Api = new ApiBackend(this);
         }
     }
 }

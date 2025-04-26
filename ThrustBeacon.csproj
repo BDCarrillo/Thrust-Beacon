@@ -156,22 +156,54 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Scripts\ThrustBeacon\APIs\CoreSystemsApiBase.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\APIs\DSApi.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\APIs\HudAPIv2.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Comp\GroupComp.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Comp\GridComp.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Comp\SignalComp.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Configs\ServerDefaults.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Session\ClientDraw.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Configs\ServerSettings.cs" />
+    <Compile Include="Data\Scripts\ThrustBeacon\APIs\CoreSystemsApiBase.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\APIs\DSApi.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\APIs\HudAPIv2.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Comp\GroupComp.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Comp\GridComp.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Comp\SignalComp.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Configs\ServerDefaults.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\PbApi\ApiBackend.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\PbApi\ThrustBeaconPbApi.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Session\ClientDraw.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Configs\ServerSettings.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Data\Scripts\ThrustBeacon\Session\SessionEvents.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Data\Scripts\ThrustBeacon\Configs\Settings.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Configs\Configs.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Networking\Networking.cs" />
-    <Compile Include="Data\Scripts\ThrustBeacon\Networking\PacketBase.cs" />
+    <Compile Include="Data\Scripts\ThrustBeacon\Configs\Settings.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Configs\Configs.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Networking\Networking.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Data\Scripts\ThrustBeacon\Networking\PacketBase.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Data\Scripts\ThrustBeacon\Session\SessionFields.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
@@ -197,6 +229,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

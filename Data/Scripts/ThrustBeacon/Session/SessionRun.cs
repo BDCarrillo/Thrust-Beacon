@@ -41,6 +41,7 @@ namespace ThrustBeacon
                     FactionCreated(faction.Key);
                 //Hook connection event to send label list
                 MyVisualScriptLogicProvider.PlayerConnected += PlayerConnected;
+                MyEntities.OnEntityCreate += OnEntityCreate;
             }
             if(Client)
             {
@@ -96,6 +97,9 @@ namespace ThrustBeacon
 
             if (Server)
             {
+                if (Tick % 119 == 0 && PbActivate && !PbApiInited)
+                    Api.PbInit();
+
                 if (Tick % 300 == 0) 
                     ServerUpdatePlayers();
                 if (Tick % 5 == 0)

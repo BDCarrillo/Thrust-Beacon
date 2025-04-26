@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using VRage.Game;
 using VRage.Game.Components;
+using VRage.Game.Entity;
 using VRage.Game.ModAPI;
 using VRage.ModAPI;
 using VRage.Utils;
@@ -24,6 +25,7 @@ namespace ThrustBeacon
             {
                 weaponSubtypeIDs.Add(def.SubtypeId);
             }
+
             MyLog.Default.WriteLineAndConsole($"{ModName}Registered {weaponSubtypeIDs.Count} weapon block types");
         }
 
@@ -34,7 +36,8 @@ namespace ThrustBeacon
             var steamId = MyAPIGateway.Multiplayer.Players.TryGetSteamId(playerId);
             if (steamId != 0)
             {
-                Networking.SendToPlayer(new PacketSettings(messageList, ServerSettings.Instance.UpdateBeaconOnControlledGrid), steamId);
+                Networking.SendToPlayer(
+                    new PacketSettings(messageList, ServerSettings.Instance.UpdateBeaconOnControlledGrid), steamId);
                 MyLog.Default.WriteLineAndConsole($"{ModName}Sent settings to player " + steamId);
             }
             else
@@ -42,14 +45,15 @@ namespace ThrustBeacon
         }
 
         //Dump current signals when hopping out of a grid
-        private void GridChange(VRage.Game.ModAPI.Interfaces.IMyControllableEntity previousEnt, VRage.Game.ModAPI.Interfaces.IMyControllableEntity newEnt)
+        private void GridChange(VRage.Game.ModAPI.Interfaces.IMyControllableEntity previousEnt,
+            VRage.Game.ModAPI.Interfaces.IMyControllableEntity newEnt)
         {
             if (newEnt is IMyCharacter)
             {
                 SignalList.Clear();
-                
+
                 //Clear out old primary
-                if(primaryBeacon != null)
+                if (primaryBeacon != null)
                 {
                     primaryBeacon.HudText = "";
                     primaryBeacon.Radius = 0;
@@ -68,7 +72,7 @@ namespace ThrustBeacon
                     IMyBeacon lastBeacon = null;
 
                     foreach (var igrid in groupGridList)
-                    {                       
+                    {
                         var grid = (MyCubeGrid)igrid;
                         foreach (var fat in grid.GetFatBlocks())
                         {
@@ -89,6 +93,7 @@ namespace ThrustBeacon
                                     beacon.Radius = 0;
                                 }
                             }
+
                             lastBeacon = beacon;
                         }
                     }
@@ -108,7 +113,8 @@ namespace ThrustBeacon
                 }
                 catch (Exception e)
                 {
-                    MyLog.Default.WriteLineAndConsole($"{ModName} Error in selection of primary beacon - replication not ready {e.InnerException}");
+                    MyLog.Default.WriteLineAndConsole(
+                        $"{ModName} Error in selection of primary beacon - replication not ready {e.InnerException}");
                 }
             }
         }
@@ -122,16 +128,19 @@ namespace ThrustBeacon
             beacon.OnClosing -= Beacon_OnClosing;
             primaryBeacon = null;
         }
+
         private void Beacon_PropertiesChanged(IMyTerminalBlock block)
         {
             //Primary beacon anti-tamper
             var beacon = block as IMyBeacon;
-            if (beacon.HudText != messageList[clientLastBeaconSizeEnum] || Math.Abs(beacon.Radius - clientLastBeaconDist) > 0.0001)
+            if (beacon.HudText != messageList[clientLastBeaconSizeEnum] ||
+                Math.Abs(beacon.Radius - clientLastBeaconDist) > 0.0001)
             {
                 beacon.Radius = clientLastBeaconDist;
                 beacon.HudText = messageList[clientLastBeaconSizeEnum];
             }
         }
+
         private void Beacon_EnabledChanged(IMyTerminalBlock block)
         {
             //Primary beacon anti-tamper
@@ -139,6 +148,7 @@ namespace ThrustBeacon
             if (!beacon.Enabled)
                 beacon.Enabled = true;
         }
+
         private void GridGroupsOnOnGridGroupCreated(IMyGridGroupData group)
         {
             if (group.LinkType != GridLinkTypeEnum.Mechanical)
@@ -151,12 +161,13 @@ namespace ThrustBeacon
             group.OnGridAdded += gComp.OnGridAdded;
             group.OnGridRemoved += gComp.OnGridRemoved;
         }
+
         private void GridGroupsOnOnGridGroupDestroyed(IMyGridGroupData group)
         {
             if (group.LinkType != GridLinkTypeEnum.Mechanical)
                 return;
             GroupComp gComp;
-            if(GroupDict.TryGetValue(group, out gComp))
+            if (GroupDict.TryGetValue(group, out gComp))
             {
                 group.OnGridAdded -= gComp.OnGridAdded;
                 group.OnGridRemoved -= gComp.OnGridRemoved;
@@ -164,20 +175,23 @@ namespace ThrustBeacon
                 GroupDict.Remove(group);
             }
         }
+
         private void FactionCreated(long obj)
         {
             IMyFaction faction;
-            if(Session.Factions.Factions.TryGetValue(obj, out faction) && (!faction.AcceptHumans || faction.IsEveryoneNpc()))
+            if (Session.Factions.Factions.TryGetValue(obj, out faction) &&
+                (!faction.AcceptHumans || faction.IsEveryoneNpc()))
             {
                 if (!npcFactions.Contains(faction.FactionId))
                     npcFactions.Add(faction.FactionId);
             }
         }
+
         private void OnMessageEnteredSender(ulong sender, string messageText, ref bool sendToOthers)
         {
             messageText.ToLower();
 
-            if(messageText == "/beacon stats")
+            if (messageText == "/beacon stats")
             {
                 sendToOthers = false;
                 if (lastLogRequestTick + 300 < Tick)
@@ -189,15 +203,22 @@ namespace ThrustBeacon
                         MyAPIGateway.Utilities.ShowNotification("Must be seated in a grid for signal stats");
                         return;
                     }
+
                     lastLogRequestTick = Tick;
-                    Networking.SendToServer(new PacketStatsRequest(Session.Player.SteamUserId, controlledBlock.CubeGrid.EntityId));
+                    Networking.SendToServer(new PacketStatsRequest(Session.Player.SteamUserId,
+                        controlledBlock.CubeGrid.EntityId));
                 }
                 else
                     MyAPIGateway.Utilities.ShowNotification("Please wait at least 5 seconds between log requests");
 
             }
+
             return;
         }
 
+        internal void OnEntityCreate(MyEntity entity)
+        {
+            if (!PbApiInited && entity is IMyProgrammableBlock) PbActivate = true;
+        }
     }
 }
