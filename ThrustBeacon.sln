@@ -7,26 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThrustBeacon", "ThrustBeaco
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|AMD64 = Debug|AMD64
 		Debug|Any CPU = Debug|Any CPU
-		Debug|x64 = Debug|x64
-		Release|AMD64 = Release|AMD64
 		Release|Any CPU = Release|Any CPU
-		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Debug|AMD64.ActiveCfg = Debug|x64
-		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Debug|AMD64.Build.0 = Debug|x64
 		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Debug|x64.ActiveCfg = Debug|x64
-		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Debug|x64.Build.0 = Debug|x64
-		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Release|AMD64.ActiveCfg = Release|Any CPU
-		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Release|AMD64.Build.0 = Release|Any CPU
 		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Release|x64.ActiveCfg = Release|x64
-		{90AB8905-FDCC-48D1-B488-8EA357DD4471}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

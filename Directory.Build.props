@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <!-- Folder containing SpaceEngineers.exe -->
+    <SEBin64Path>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 244850@InstallLocation)\Bin64</SEBin64Path>
+    <!-- Typically %appdata%\SpaceEngineers -->
+    <SEAppDataPath>$([System.Environment]::GetFolderPath(SpecialFolder.ApplicationData))\SpaceEngineers</SEAppDataPath>
+    <!-- Location of SEWhitelistChecker output dll, leave empty/comment out to skip checking -->
+    <!-- Read more: https://github.com/WhitePhoera/SEWhitelistDiagnostic -->
+<!--    <SEWhitelistCheckerPath>$([System.Environment]::GetFolderPath(SpecialFolder.UserProfile))\Documents\SE\SEWhitelistChecker.dll</SEWhitelistCheckerPath> -->
+  </PropertyGroup>
+</Project>
