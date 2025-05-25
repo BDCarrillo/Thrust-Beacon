@@ -20,7 +20,7 @@ namespace ThrustBeacon
                 var camPos = Session.Camera.Position;
 
                 //Draw main signal list
-                foreach (var signal in SignalList.ToArray())
+                foreach (var signal in SignalList)
                 {
                     var contact = signal.Value.Item1;
 

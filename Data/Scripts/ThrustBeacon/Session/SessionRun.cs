@@ -117,6 +117,17 @@ namespace ThrustBeacon
             }
         }
 
+        private void SeamlessServerUnloaded()
+        {
+            if (Client) //Presumably not needed but just in case
+            {
+                ownShipLabel.DeleteMessage();
+                ownShipLabel = null;
+                clientActionRegistered = false;
+                SignalList.Clear();
+            }
+        }
+
         protected override void UnloadData()
         {
             if (Server)

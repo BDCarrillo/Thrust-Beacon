@@ -70,6 +70,8 @@ namespace Digi.Example_NetworkProtobuf
             MyLog.Default.WriteLineAndConsole($"{Session.ModName}: Received server label list");
             Session.clientActionRegistered = false; //Reset for Seamless purposes
             Session.SignalList.Clear(); //Reset for Seamless purposes
+            Session.ownShipLabel.DeleteMessage();
+            Session.ownShipLabel = null;
             return false;
         }
     }
