@@ -57,7 +57,6 @@ namespace ThrustBeacon
         internal static bool firstLoad = false;
         internal long controlledGridParent = 0;
         internal static HudAPIv2.HUDMessage ownShipLabel = new HudAPIv2.HUDMessage(null, Vector2D.Zero, null, -1, 1, true, true);
-;
 
         //Server specific
         internal static readonly List<MyStringHash> weaponSubtypeIDs = new List<MyStringHash>();
