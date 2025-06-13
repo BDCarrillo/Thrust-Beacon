@@ -121,7 +121,8 @@ namespace ThrustBeacon
         {
             if (Client) //Presumably not needed but just in case
             {
-                ownShipLabel.DeleteMessage();
+                if (ownShipLabel != null && hudAPI.Heartbeat)
+                    ownShipLabel.DeleteMessage();
                 ownShipLabel = null;
                 clientActionRegistered = false;
                 SignalList.Clear();

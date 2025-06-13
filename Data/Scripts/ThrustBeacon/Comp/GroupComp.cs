@@ -25,7 +25,7 @@ namespace ThrustBeacon
         internal string groupLog = "";
         internal ulong groupLogRequestor = 0;
         internal float groupDetailMod = 0;
-
+        internal bool stealth = false;
         internal void InitGrids()
         {
             List <IMyCubeGrid> tempGridList = new List<IMyCubeGrid>();
@@ -106,6 +106,10 @@ namespace ThrustBeacon
                 groupSignalRange += gridComp.signalRange;
                 groupDetectionRange += gridComp.detectionRange;
                 groupDetailMod += gridComp.detailRange;
+
+                //Stealth mod check
+                if (((uint)gridComp.Grid.Flags & 0x20000000) > 0) //Stealth flag from Ash's mod
+                    stealth = true;
 
                 if (groupLogging && gridComp.gridLog.Length > 0)
                 {

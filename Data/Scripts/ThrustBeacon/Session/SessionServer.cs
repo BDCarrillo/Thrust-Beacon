@@ -89,9 +89,8 @@ namespace ThrustBeacon
                 //For each player, iterate each grid
                 foreach (var group in GroupDict.Values)
                 {
-                    var stealth = false;//((uint)grid.Grid.Flags & 0x20000000) > 0; //Stealth flag from Ash's mod
                     var playerGrid = controlledGrid == null ? false : group.GridDict.ContainsKey(controlledGrid);
-                    if ((!playerGrid && group.groupBroadcastDist < 2) || stealth || group.groupFuncCount == 0) continue;
+                    if ((!playerGrid && group.groupBroadcastDist < 2) || group.stealth || group.groupFuncCount == 0) continue;
                     var gridPos = group.groupSphere.Center;
                     var distToTargSqr = Vector3D.DistanceSquared(playerPos, gridPos);
                     if (!playerGrid && distToTargSqr > group.groupBroadcastDistSqr + playerGridDetectionModSqr) continue; //Distance check
