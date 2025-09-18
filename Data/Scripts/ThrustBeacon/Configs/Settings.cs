@@ -80,8 +80,7 @@ namespace ThrustBeacon
         {
             Settings s = Settings.Default;
             var Filename = "Config.cfg";
-            var localFileExists = MyAPIGateway.Utilities.FileExistsInLocalStorage(Filename, typeof(Settings));
-            if(localFileExists)
+            if (MyAPIGateway.Utilities.FileExistsInLocalStorage(Filename, typeof(Settings)))
             {
                 try
                 {
@@ -110,8 +109,8 @@ namespace ThrustBeacon
             stopDisplayTimeTicks = (int)(s.stopDisplayTime * 60);
             keepTimeTicks = (int)(s.keepTime * 3600);
             MyLog.Default.WriteLineAndConsole(ModName + "Initialized client config");
-
         }
+
         public static void Save(Settings settings)
         {
             var Filename = "Config.cfg";

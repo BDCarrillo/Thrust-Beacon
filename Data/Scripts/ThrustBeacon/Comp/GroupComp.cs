@@ -30,36 +30,44 @@ namespace ThrustBeacon
         {
             List <IMyCubeGrid> tempGridList = new List<IMyCubeGrid>();
             iMyGroup.GetGrids(tempGridList);
-            foreach(var startGrid in tempGridList)
+            foreach(MyCubeGrid startGrid in tempGridList)
             {
-                var gridComp = new GridComp();
-                gridComp.Init((MyCubeGrid)startGrid, iMyGroup);
-                GridDict.Add(startGrid, gridComp);
-            }            
+                if (!startGrid.IsPreview)
+                {
+                    var gridComp = new GridComp();
+                    gridComp.Init(startGrid, iMyGroup);
+                    GridDict.Add(startGrid, gridComp);
+                }
+            }
         }
 
         internal void OnGridAdded(IMyGridGroupData AddedTo, IMyCubeGrid grid, IMyGridGroupData RemovedFrom)
         {
-            if (RemovedFrom != null) //Existing comp, transfer over and update fields
+            var gridCast = grid as MyCubeGrid;
+            if (!gridCast.IsPreview)
             {
-                var oldGroup = Session.GroupDict[RemovedFrom];
-                var oldComp = oldGroup.GridDict[grid];
-                //Update old
-                oldGroup.GridDict.Remove(grid);
-                oldGroup.groupFuncCount -= oldComp.funcCount;
-                oldGroup.UpdateGroup();
+                if (RemovedFrom != null) //Existing comp, transfer over and update fields
+                {
+                    var oldGroup = Session.GroupDict[RemovedFrom];
+                    var oldComp = oldGroup.GridDict[grid];
+                    //Update old
+                    oldGroup.GridDict.Remove(grid);
+                    oldGroup.groupFuncCount -= oldComp.funcCount;
+                    oldGroup.UpdateGroup();
 
-                //Update new
-                oldComp.group = AddedTo;
-                GridDict.Add(grid, oldComp);
-                groupFuncCount += oldComp.funcCount;
-                UpdateGroup();
-            }
-            else //New comp
-            {
-                var gridComp = new GridComp();
-                gridComp.Init((MyCubeGrid)grid, iMyGroup);
-                GridDict.Add(grid, gridComp);               
+                    //Update new
+                    oldComp.group = AddedTo;
+                    GridDict.Add(grid, oldComp);
+                    groupFuncCount += oldComp.funcCount;
+                    UpdateGroup();
+                }
+                else //New comp
+                {
+
+                    var gridComp = new GridComp();
+                    gridComp.Init((MyCubeGrid)grid, iMyGroup);
+                    GridDict.Add(grid, gridComp);
+                }
             }
         }
 
