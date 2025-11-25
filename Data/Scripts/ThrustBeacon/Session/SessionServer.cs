@@ -66,7 +66,7 @@ namespace ThrustBeacon
                 var playerPos = player.Character.WorldAABB.Center;
 
                 //Pull modifiers for current players grid (IE if it has increased detection range)
-                var controlledGrid = (IMyCubeGrid)player.Controller?.ControlledEntity?.Entity?.Parent;
+                var controlledGrid = player.Controller?.ControlledEntity?.Entity?.GetTopMostParent() as IMyCubeGrid;
                 var playerGridDetectionModSqr = 0f;
                 var playerGridDetailMod = 0f;
                 if (controlledGrid != null)
