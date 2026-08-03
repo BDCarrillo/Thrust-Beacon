@@ -38,6 +38,8 @@ namespace ThrustBeacon
             EnablePlanetOcclusion = true,
             EnableBroadcastMirroringForNPCs = false,
             EnableBroadcastMirroring = false,
+            IncludeMassInSignal = false,
+            DefaultMassDivisor = 20, 
         };
         [ProtoMember(1)]
         public bool IncludePowerInSignal { get; set; } = true;
@@ -117,6 +119,10 @@ namespace ThrustBeacon
         public bool EnableBroadcastMirroringForNPCs { get; set; } = false;
         [ProtoMember(39)]
         public bool EnableBroadcastMirroring { get; set; } = false;
+        [ProtoMember(40)]
+        public bool IncludeMassInSignal { get; set; } = false;
+        [ProtoMember(41)]
+        public int DefaultMassDivisor { get; set; } = 20;
     }
     public partial class Session
     {

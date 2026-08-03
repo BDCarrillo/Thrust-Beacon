@@ -82,11 +82,10 @@ namespace ThrustBeacon
             var Filename = "Config.cfg";
             if (MyAPIGateway.Utilities.FileExistsInLocalStorage(Filename, typeof(Settings)))
             {
+                TextReader reader = MyAPIGateway.Utilities.ReadFileInLocalStorage(Filename, typeof(Settings));
                 try
                 {
-                    TextReader reader = MyAPIGateway.Utilities.ReadFileInLocalStorage(Filename, typeof(Settings));
                     string text = reader.ReadToEnd();
-                    reader.Close();
                     s = MyAPIGateway.Utilities.SerializeFromXML<Settings>(text);
                     Settings.Instance = s;
                 }
@@ -97,6 +96,7 @@ namespace ThrustBeacon
                     s = Settings.Default;
                     Save(s);
                 }
+                reader.Close();
             }
             else
             {

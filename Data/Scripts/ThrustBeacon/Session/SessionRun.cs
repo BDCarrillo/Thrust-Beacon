@@ -136,12 +136,6 @@ namespace ThrustBeacon
                 Clean();
                 if (dsAPI != null)
                     dsAPI.Unload();
-                try //Because this throws a NRE in keen code if you alt-F4
-                {
-                    MyAPIGateway.GridGroups.OnGridGroupCreated -= GridGroupsOnOnGridGroupCreated;
-                    MyAPIGateway.GridGroups.OnGridGroupDestroyed -= GridGroupsOnOnGridGroupDestroyed;
-                }
-                catch { }
                 MyVisualScriptLogicProvider.PlayerConnected -= PlayerConnected;
                 Session.Factions.FactionCreated -= FactionCreated;
                 MyEntities.OnEntityCreate -= OnEntityCreate;

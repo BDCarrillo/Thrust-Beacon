@@ -240,8 +240,15 @@ namespace ThrustBeacon
                 //Item 6 is heat, 0-100 in increments of 10
             }
 
+            //Mass
+            int finalMass = 0;
+            if (ss.IncludeMassInSignal)
+            {
+                finalMass += (int)(Grid.Mass / ss.DefaultMassDivisor);
+            }
+
             //Final tally
-            broadcastDist = finalPower + finalShield + finalThrust + finalWeaponHeat;
+            broadcastDist = finalPower + finalShield + finalThrust + finalWeaponHeat + finalMass;
 
 
             //Cooldown
@@ -292,6 +299,8 @@ namespace ThrustBeacon
                         gridLog += $"\n    Weapon Heat: {finalWeaponHeat}m";
                     if (finalShield > 0)
                         gridLog += $"\n    Shields: {finalShield}m";
+                    if (finalMass > 0)
+                        gridLog += $"\n    Mass: {finalMass}m";
                     if (signalRange != 0)
                         gridLog += $"\n    Signal Range Mod: {signalRange}m";
                     if (detectionRange != 0)
